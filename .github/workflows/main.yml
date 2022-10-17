@@ -1,8 +1,7 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: CI
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  build:
     runs-on: ubuntu-latest
     steps:          
       - uses: actions/checkout@v3
@@ -12,5 +11,5 @@ jobs:
       - run: notebook-generator $GITHUB_WORKSPACE/codes --output /tmp/team_reference.pdf
       - uses: actions/upload-artifact@v3
         with:
-          name: final
+          name: notebook-${GITHUB_SHA::6}
           path: /tmp/team_reference.pdf
