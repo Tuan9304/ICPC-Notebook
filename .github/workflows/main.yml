@@ -9,7 +9,8 @@ jobs:
       - run: sudo aptitude install texlive texlive-latex-extra -y
       - run: sudo npm install -g notebook-generator -y
       - run: notebook-generator $GITHUB_WORKSPACE/codes --output /tmp/team_reference.pdf
+      - run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
       - uses: actions/upload-artifact@v3
         with:
-          name: notebook-${GITHUB_SHA::6}
+          name: notebook-${SHORT_SHA}
           path: /tmp/team_reference.pdf
