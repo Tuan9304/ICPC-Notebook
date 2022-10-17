@@ -12,5 +12,5 @@ jobs:
       - run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
       - uses: actions/upload-artifact@v3
         with:
-          name: ${{ SHORT_SHA }}-notebook
+          name: ${{ env.SHORT_SHA }}-notebook
           path: /tmp/team_reference.pdf
