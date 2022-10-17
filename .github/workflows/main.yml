@@ -5,9 +5,9 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - run: apt install aptitude node
-      - run: aptitude install texlive texlive-latex-extra
-      - run: npm install -g notebook-generator
+      - run: sudo apt install aptitude node -y
+      - run: sudo aptitude install texlive texlive-latex-extra -y
+      - run: sudo npm install -g notebook-generator -y
       - run: notebook-generator ./ --output /tmp/team_reference.pdf
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
