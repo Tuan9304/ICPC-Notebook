@@ -61,7 +61,7 @@ int operator%(const vi &a, int x) { //x < BASE
 }
 istream &operator>>(istream &cin, vi &a) {
   string s; cin >> s;
-  a.assign(s.size() / 4 + 1, 0);
+  a.assign(sz(s) / 4 + 1, 0);
   for (int i = 0; i < sz(s); ++i) {
     int x = (sz(s) - 1 - i) / 4; // <- log10(BASE)=4
     a[x] = a[x] * 10 + (s[i] - '0');
@@ -75,7 +75,7 @@ ostream &operator<<(ostream &cout, const vi &a) {
   return cout;
 }
 // vi a, b; cin >> a >> b;
-// a = to_vi(x)
+// a = to_vi(x);
 // a + b; a * b; a / x; a % x;
 // if(a < b) cout << '-' << b - a; 
-// else cout << a - b
+// else cout << a - b;
