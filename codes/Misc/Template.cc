@@ -18,6 +18,7 @@ template<typename T> using mipq = priority_queue<T, vt<T>, greater<T>>; template
 #define se second
 #define mp make_pair
 #define pb push_back
+#define eb emplace_back
 const int inf=1e9+7;
 const ll infll = 1e18 + 10;
 template <typename T> T fgcd(T a, T b) {while(b) swap(b, a %= b); return a;}
