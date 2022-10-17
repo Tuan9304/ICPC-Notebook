@@ -14,11 +14,12 @@ texlive for Windows:
 
 ## Install
 
+    git clone https://github.com/Tuan9304/ICPC-Notebook
     npm install -g notebook-generator
 
 ## Use
 
-    Usage: notebook-generator <source_dir> [options]
+    Usage: notebook-generator ./codes [options]
 
     Auto generate notebooks from your source code
 
@@ -32,14 +33,6 @@ texlive for Windows:
         -p --paper <size>         paper size is allowed letterpaper, a4paper, a5paper. (default: "letterpaper")
         -h, --help                output usage information
         -I --image <source>       cover image to be added in the notebook.
-
-
-example:
-
-    notebook-generator ./ --output /tmp/team_reference.pdf
-    notebook-generator ./ --author "Universidad Tecnologica de Pereira" --initials UTP --size 12 --columns 3 --paper a4paper --image ./in-silicon
-
-The second one will create a 'notebook.pdf' file in the current directory.
 
 ----
 https://github.com/pin3da/notebook-generator
