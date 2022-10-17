@@ -9,8 +9,7 @@ jobs:
       - run: sudo apt install aptitude npm -y
       - run: sudo aptitude install texlive texlive-latex-extra -y
       - run: sudo npm install -g notebook-generator -y
-      - run: ls $GITHUB_WORKSPACE
-      - run: notebook-generator $GITHUB_WORKSPACE/ICPC-Notebook/codes --output /tmp/team_reference.pdf
+      - run: notebook-generator $GITHUB_WORKSPACE/codes --output /tmp/team_reference.pdf
       - uses: actions/upload-artifact@v3
         with:
           name: final
