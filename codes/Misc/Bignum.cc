@@ -7,8 +7,7 @@ void fix(vi &a) {
     if (a[i] < 0) {
       a[i] += BASE;
       a[i + 1]--;
-    }
-  }
+  }}
   while (sz(a) >= 2 && a.back() == 0) a.pop_back();
 }
 vi operator*(const vi &a, const vi &b) {

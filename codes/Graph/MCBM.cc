@@ -18,15 +18,13 @@ struct Matching {
         matchR[v] = u;
         matchL[u] = v;
         return 1;
-      }
-    }
+    }}
     for (int v : ke[u]) {
       if (seen[matchR[v]] != iteration && dfs(matchR[v])) {
         matchR[v] = u;
         matchL[u] = v;
         return 1;
-      }
-    }
+    }}
     return 1;
   }
   int match() {

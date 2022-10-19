@@ -1,64 +1,64 @@
-// Maximum flow & Minimum Cut
-struct FlowEdge {
-  int v, u;
-  ll cap, flow = 0;
-  FlowEdge(int v, int u, ll cap) : v(v), u(u), cap(cap) {}
+// Maxflow & MinCut
+// index from 0
+struct Edge {
+  int a,b,cap,flow;
+  Edge(int _a, int _b, int _cap, int _flow) : a(_a), b(_b), cap(_cap), flow(_flow) {}
 };
-struct Dinic {
-  vt<FlowEdge> edges;
-  vvi adj;
-  int n, m = 0, s, t;
-  vi level, ptr;
-  queue<int> q;
-  Dinic(int n, int s, int t) : n(n), s(s), t(t) {
-    adj.resize(n);
-    level.resize(n);
-    ptr.resize(n);
+struct MaxFlow {
+  int n, s, t;
+  vi d, ptr, q;
+  vt<Edge> e;
+  vvi g;
+  MaxFlow(int _n) : n(_n), d(_n), ptr(_n), q(_n), g(_n) {
+    e.clear();
+    for (int i = 0; i < n; i++) {
+      g[i].clear();
+      ptr[i] = 0;
+  }}
+  void addEdge(int a, int b, int cap) {
+    g[a].pb(sz(e));
+    e.eb(a,b,cap,0);
+    g[b].pb(sz(e));
+    e.eb(b,a,0,0);
   }
-  void add_edge(int v, int u, ll cap) {
-    edges.eb(v, u, cap);
-    edges.eb(u, v, 0);
-    adj[v].pb(m);
-    adj[u].pb(m + 1);
-    m += 2;
-  }
-  bool bfs() {
-    level[s] = 0;
-    q.push(s);
-    while (!q.empty()) {
-      int v = q.front();
-      q.pop();
-      for (int id : adj[v]) {
-        if (edges[id].cap - edges[id].flow < 1) continue;
-        if (level[edges[id].u] != -1) continue;
-        level[edges[id].u] = level[v] + 1;
-        q.push(edges[id].u);
-      }
-    }
-    return level[t] != -1;
-  }
-  ll dfs(int v, ll pushed) {
-    if (pushed == 0) return 0;
-    if (v == t) return pushed;
-    for (int& cid = ptr[v]; cid < sz(adj[v]); cid++) {
-      int id = adj[v][cid], u = edges[id].u;
-      if (level[v] + 1 != level[u] || edges[id].cap - edges[id].flow < 1) continue;
-      ll tr = dfs(u, min(pushed, edges[id].cap - edges[id].flow));
-      if (tr == 0) continue;
-      edges[id].flow += tr;
-      edges[id ^ 1].flow -= tr;
-      return tr;
-    }
-    return 0;
-  }
-  ll flow() {
-    ll f = 0;
-    while (1) {
-      fill(all(level), -1);
+  int getMaxFlow(int _s, int _t) {
+    s = _s; t = _t;
+    int flow = 0;
+    while(1) {
       if (!bfs()) break;
       fill(all(ptr), 0);
-      while (ll pushed = dfs(s, flow_inf)) f += pushed;
+      while (int pushed = dfs(s, inf)) flow += pushed;
     }
-    return f;
+    return flow;
+  }
+private:
+  bool bfs() {
+    int qh = 0, qt = 0;
+    q[qt++] = s;
+    fill(all(d), -1);
+    d[s] = 0;
+    while (qh < qt && d[t] == -1) {
+      int v = q[qh++];
+      for (int i = 0; i < sz(g[v]); i++) {
+        int id = g[v][i], to = e[id].b;
+        if (d[to] == -1 && e[id].flow < e[id].cap) {
+          q[qt++] = to;
+          d[to] = d[v] + 1;
+    }}}
+    return d[t] != -1;
+  }
+  int dfs (int v, int flow) {
+    if (!flow) return 0;
+    if (v == t) return flow;
+    for (; ptr[v] < sz(g[v]); ++ptr[v]) {
+      int id = g[v][ptr[v]], to = e[id].b;
+      if (d[to] != d[v] + 1) continue;
+      int pushed = dfs(to, min(flow, e[id].cap - e[id].flow));
+      if (pushed) {
+        e[id].flow += pushed;
+        e[id^1].flow -= pushed;
+        return pushed;
+    }}
+    return 0;
   }
 };

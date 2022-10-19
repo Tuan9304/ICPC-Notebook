@@ -19,10 +19,8 @@ int solve() {
         if (mn >= dp[i][k] + dp[k+1][j] + cost) {
           opt[i][j] = k; 
           mn = dp[i][k] + dp[k+1][j] + cost; 
-        }
-      }
+      }}
       dp[i][j] = mn; 
-    }
-  }
+  }}
   cout << dp[0][N-1] << endl;
 }

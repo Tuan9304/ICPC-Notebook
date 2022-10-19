@@ -1,3 +1,4 @@
+// WIP
 struct Rect {
   ll x, y, a;
   bool operator<(Rect B) { return x < B.x; }
