@@ -14,6 +14,6 @@ void EulerTour(list<int>::iterator i, int u) {
       }}
       EulerTour(cyc.insert(i, u), v.first);
 }}}
-// inside int main()
-  cyc.clear();
-  EulerTour(cyc.begin(), start);
+// inside main()
+//   cyc.clear();
+//   EulerTour(cyc.begin(), start);
