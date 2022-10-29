@@ -1,3 +1,4 @@
+// solving DP[i] = Aj * xi + Bj + C
 deque<ii> st;
 ll calc(ii x, ll y) {
   return x.F * y + x.S;
@@ -7,7 +8,7 @@ bool ck(ii x, ii y, ii z) {
 }
 // inside main()
   // lines must be sorted inc/dec by A (Ax + B)
-  // FOR EACH QUERY
+  // FOR EACH x inc/dec
     while(sz(st) > 1 && calc(st.front(), x) >= calc(st[1], x)) st.pop_front(); // for max: <=
     dp[i] = ... + calc(st.front(), x);
     ii t = mp(Ai, Bi);
